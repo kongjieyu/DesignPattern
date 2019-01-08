@@ -1,0 +1,5 @@
+{
+    // presets字段设定转码规则
+    "presets": ["es2015", "latest"],
+    "plugins": []
+}
