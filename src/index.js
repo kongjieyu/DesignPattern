@@ -1,5 +1,6 @@
 //UML
 class People{
+    //house 是People的一个属性，类型是House这个类
     constructor(name, house){
         this.name = name
         this.house = house
