@@ -1,42 +1,31 @@
-//父类
-class People{
-    constructor(name,age){
-        this.name = name
-        this.age = age
+class jQuery {
+    constructor(selector) {
+        let slice = Array.prototype.slice
+        let dom = slice.call(document.querySelectorAll(selector))
+        let len = dom? dom.length : 0
+        for (let i = 0; i <len; i++) {
+            this[i] = dom[i]
+        }
+        this.length = len
+        this.selector = selector || ''
     }
-    eat(){
-        alert(`${this.name} eat something`)
+    append(node){
+
     }
-    speak(){
-        alert(`My name is ${this.name}, I am ${this.age}`)
+    addClass(name){
+
+    }
+    html(data){
+
     }
 }
-
-// let Kong = new People('May', 18)
-// Kong.eat()
-// Kong.speak()
-
-// let Chen = new People('Chen', 25)
-// Chen.eat()
-// Chen.speak()
-//------------------
-
-//子类： 继承父类
-class Student extends People {
-    constructor(name,age,number){
-        super(name,age)
-        this.number = number
-    }
-    study() {
-        alert(`${this.name} studys`)
-    }
+//入口
+window.$ = function (selector) {
+    //工厂模式
+    return new jQuery(selector)
 }
 
-let xiaoming = new Student('xiaoming', 18, 'A1')
-xiaoming.study()
-alert(xiaoming.number)
-xiaoming.eat()
-let xiaochen = new Student('xiaochen', 28, 'A2')
-xiaochen.speak()
-xiaochen.study()
-alert(xiaochen.number)
+//测试代码
+var $p = $('p')
+console.log($p)
+console.log($p.addClass)
