@@ -1,47 +1,33 @@
-//UML
-class People{
-    //house 是People的一个属性，类型是House这个类
-    constructor(name, house){
-        this.name = name
-        this.house = house
-    }
-    saySomething(){
-
-    }
+function loadImg(src){
+    let promise = new Promise(function(resolve, reject){
+        let img = document.createElement('img')
+        img.onload = function(){
+            resolve(img)
+        }
+        img.onerror = function(){
+            reject('图片加载失败')
+        }
+        img.src = src
+    })
+    return promise
 }
 
-class A extends People {
-    constructor(name, house){
-        super(name, house)
-    }
-    saySomething(){
-        alert('I am A')
-    }
-}
+let src = 'http://img5.imgtn.bdimg.com/it/u=1526880979,1139364922&fm=26&gp=0.jpg'
+//loadImg()返回一个promise
+//所以result接口的值是个promise
+let result = loadImg(src)
 
-class B extends People {
-    constructor(name, house){
-        super(name, house)
-    }
-    saySomething(){
-        alert('I am B')
-    }
-}
-
-class House {
-    constructor(city){
-        this.city = city
-    }
-    showCity(){
-        alert(`house in ${this.city}`)
-    }
-}
-
-let aHouse = new House('beijing')
-let a = new A('a', aHouse)
-a.saySomething()
-aHouse.showCity()
-let bHouse = new House('Shanghai')
-let b = new B('b', bHouse)
-b.saySomething()
-bHouse.showCity()
+result.then(function(img){
+    //part1
+    
+    alert(`width: ${img.width}`)
+    //这里需要return img, 因为在第二个then的时候需要用到
+    return img
+}).then(function(img){
+    //part2
+    alert(`height: ${img.height}`)
+    //最后用catch捕获异常
+}).catch(function(ex){
+    //console.log('here')
+    alert(ex)
+})
