@@ -1,31 +1,46 @@
-class jQuery {
-    constructor(selector) {
-        let slice = Array.prototype.slice
-        let dom = slice.call(document.querySelectorAll(selector))
-        let len = dom? dom.length : 0
-        for (let i = 0; i <len; i++) {
-            this[i] = dom[i]
-        }
-        this.length = len
-        this.selector = selector || ''
+//UML
+class People{
+    constructor(name, house){
+        this.name = name
+        this.house = house
     }
-    append(node){
-
-    }
-    addClass(name){
-
-    }
-    html(data){
+    saySomething(){
 
     }
 }
-//入口
-window.$ = function (selector) {
-    //工厂模式
-    return new jQuery(selector)
+
+class A extends People {
+    constructor(name, house){
+        super(name, house)
+    }
+    saySomething(){
+        alert('I am A')
+    }
 }
 
-//测试代码
-var $p = $('p')
-console.log($p)
-console.log($p.addClass)
+class B extends People {
+    constructor(name, house){
+        super(name, house)
+    }
+    saySomething(){
+        alert('I am B')
+    }
+}
+
+class House {
+    constructor(city){
+        this.city = city
+    }
+    showCity(){
+        alert(`house in ${this.city}`)
+    }
+}
+
+let aHouse = new House('beijing')
+let a = new A('a', aHouse)
+a.saySomething()
+aHouse.showCity()
+let bHouse = new House('Shanghai')
+let b = new B('b', bHouse)
+b.saySomething()
+bHouse.showCity()
