@@ -1,33 +1,42 @@
-function loadImg(src){
-    let promise = new Promise(function(resolve, reject){
-        let img = document.createElement('img')
-        img.onload = function(){
-            resolve(img)
-        }
-        img.onerror = function(){
-            reject('图片加载失败')
-        }
-        img.src = src
-    })
-    return promise
+//车 父类
+class Car{
+    constructor(number, name){
+        this.number = number
+        this.name = name
+    }
 }
 
-let src = 'http://img5.imgtn.bdimg.com/it/u=1526880979,1139364922&fm=26&gp=0.jpg'
-//loadImg()返回一个promise
-//所以result接口的值是个promise
-let result = loadImg(src)
+//专车
+class ZhuanChe extends Car{
+    constructor(number, name, price){
+        super(number, name)
+        //可以直接在这里固定价格
+        // this.price = 2
+        this.price = price
+    }
+}
 
-result.then(function(img){
-    //part1
-    
-    alert(`width: ${img.width}`)
-    //这里需要return img, 因为在第二个then的时候需要用到
-    return img
-}).then(function(img){
-    //part2
-    alert(`height: ${img.height}`)
-    //最后用catch捕获异常
-}).catch(function(ex){
-    //console.log('here')
-    alert(ex)
-})
+//快车
+class KuaiChe extends Car{
+    constructor(number, name, price){
+        super(number, name)
+        this.price = price
+    }
+}
+
+class Trip{
+    constructor(car, distance){
+        this.car = car
+        this.distance = distance
+    }
+    start(){
+        console.log(`Number: ${this.car.number}, Name: ${this.car.name}`)
+    }
+    end(){
+        console.log(`Price: ${this.car.price*this.distance}`)
+    }
+}
+let carA = new KuaiChe(1234,'飞度')
+let tripA = new Trip(carA, 10)
+tripA.start()
+tripA.end()
