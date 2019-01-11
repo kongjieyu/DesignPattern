@@ -1,18 +1,25 @@
-function mixins(...list){
-    return function(target){
-        Object.assign(target.prototype, ...list)
+class RealImg{
+    constructor(fileName){
+        this.fileName = fileName
+        this.loadFromDisk()
+    }
+    display(){
+        console.log('display...'+this.fileName)
+    }
+    loadFromDisk(){
+        console.log('loading...'+this.fileName)
     }
 }
 
-const Foo = {
-    foo(){
-        alert('foo')
+class ProxyImg{
+    constructor(fileName){
+        this.realImg = new RealImg(fileName)
+    }
+    display(){
+        this.realImg.display()
     }
 }
-@mixins(Foo)
-class MyClass{
 
-}
-
-let obj = new MyClass
-obj.foo()
+//测试代码
+let proxyImg = new ProxyImg('picture.png')
+proxyImg.display()
