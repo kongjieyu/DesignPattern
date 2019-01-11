@@ -118,3 +118,5 @@ park.out(car2)
 console.log('第三辆车进入')
 console.log(park.emptyNum())
 park.in(car3)
+
+
